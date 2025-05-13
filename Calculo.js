@@ -6,7 +6,8 @@ import {
   TouchableOpacity, 
   StyleSheet, 
   Animated,
-  Easing 
+  Easing,
+  Platform
 } from 'react-native';
 
 class Calculo extends Component {
@@ -94,10 +95,17 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: '80%',
-    shadowColor: '#00F0FF',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 20,
+    ...Platform.select({
+      web: {
+        boxShadow: '0 0 20px rgba(0, 240, 255, 0.5)',
+      },
+      default: {
+        shadowColor: '#00F0FF',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.5,
+        shadowRadius: 20,
+      }
+    }),
     elevation: 20,
   },
   modalContent: {
